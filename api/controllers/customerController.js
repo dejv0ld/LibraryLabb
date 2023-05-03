@@ -1,15 +1,18 @@
-const { getAllCustomers, addCustomer, getCustomerByKeyword, editCustomer } = require("../repositories/customerRepository" );
+const {
+  getAllBooks,
+  addCustomer,
+  getBooksByKeyword,
+  editCustomer
+} = require('../repositories/customerRepository')
 
 async function search(req, res) {
+  let data = await getBooksByKeyword(req.query.keyword)
 
-    let data = await getCustomerByKeyword(req.query.keyword);
+  console.log(data)
 
-    console.log(data);
-    
-    return res.json(data);
+  return res.json(data)
 }
 
-
 module.exports = {
-    search
+  search
 }

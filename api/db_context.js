@@ -1,13 +1,14 @@
 const pgp = require('pg-promise')(/* options */)
-const db = pgp('postgres://postgres:Temple1!=Temple2@localhost:5432/dvdrental')
+const db = pgp('postgres://postgres:Acv44t5u.@localhost:5432/Library')
 
-async function selectCustomerByKeyword(keyword) {
+async function selectBooksByKeyword(keyword) {
+  let data = await db.any(
+    `SELECT * FROM books WHERE title LIKE '${keyword}%' OR author_name LIKE '${keyword}%'`
+  )
 
-  let data = await db.any(`SELECT * FROM customer WHERE first_name LIKE '${keyword}%'`);
-
-  return data;
+  return data
 }
 
 module.exports = {
-    selectCustomerByKeyword
+  selectBooksByKeyword
 }
