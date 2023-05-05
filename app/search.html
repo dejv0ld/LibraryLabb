@@ -20,6 +20,54 @@
 
     <ul id="searchResults"></ul>
 
+    <!-- ADD BOOK 3/5 -->
+
+    <h1>Add Book</h1>
+    <form id="addBookForm">
+      <label for="author_name">Author Name:</label>
+      <input type="text" id="author_name" name="author_name" required /><br />
+
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required /><br />
+
+      <label for="genre">Genre:</label>
+      <input type="text" id="genre" name="genre" required /><br />
+
+      <label for="year">Year:</label>
+      <input type="number" id="year" name="year" required /><br />
+
+      <label for="total_copies">Total Copies:</label>
+      <input
+        type="number"
+        id="total_copies"
+        name="total_copies"
+        required
+      /><br />
+
+      <label for="available_copies">Available Copies:</label>
+      <input
+        type="number"
+        id="available_copies"
+        name="available_copies"
+        required
+      /><br />
+
+      <button type="submit">Add Book</button>
+      <!--  ------------------------------------ -->
+    </form>
+    <!--  UPDATE BOOK 3/5 -->
+    <div id="updateBookForm" style="display: none">
+      <h2>Update Book</h2>
+      <input type="hidden" id="updateBookId" />
+      <input type="text" id="updateTitle" placeholder="Title" />
+      <input type="text" id="updateAuthor" placeholder="Author" />
+      <input type="text" id="updateGenre" placeholder="Genre" />
+      <input type="number" id="updateQuantity" placeholder="Quantity" />
+      <button onclick="updateBook()">Update Book</button>
+      <!--DELETE 4/5-->
+      <button id="delete-book-btn">Delete Book</button>
+    </div>
+
     <script>
       const btnSearch = document.querySelector('#search')
       const btnUpdate = document.querySelector('#btnUpdate')
@@ -37,7 +85,27 @@
           let li = document.createElement('li')
           let a = document.createElement('a')
 
-          a.innerText = `${book.author_name} - ${book.title}`
+          a.innerText = `Titel: ${book.title} - Författare: ${book.author_name} - Tillgängliga: ${book.available_copies}`
+
+          a.href = '#' //UPDATE BOOK 3/5
+          //UPDATE BOOK 3/5
+          a.onclick = () => {
+            showUpdateForm(
+              book.book_id,
+              book.title,
+              book.author_name,
+              book.genre,
+              book.quantity
+            )
+          }
+          //-----------
+
+          //DELETE BOOK 3/5
+          const deleteButton = document.createElement('button')
+          deleteButton.innerText = 'Delete'
+          deleteButton.onclick = () => deleteBook(book.book_id)
+          a.appendChild(deleteButton)
+          //--------------------------------
 
           li.appendChild(a)
           ul.appendChild(li)
@@ -70,6 +138,103 @@
 
         return data
       }
+
+      //ADD BOOK 3/5
+
+      const form = document.getElementById('addBookForm')
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault()
+
+        const formData = new FormData(form)
+        const data = Object.fromEntries(formData)
+
+        const response = await fetch(
+          'http://localhost:3001/customer/add-book',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }
+        )
+
+        if (response.ok) {
+          const result = await response.json()
+          alert(result.message)
+          form.reset()
+        } else {
+          alert('Error: Failed to add book')
+        }
+      })
+      //--------------------------------------------------
+
+      //UPDATE BOOK 3/5
+
+      function showUpdateForm(bookId, title, author, genre, quantity) {
+        document.getElementById('updateBookForm').style.display = 'block'
+        document.getElementById('addBookForm').style.display = 'none'
+
+        document.getElementById('updateBookId').value = bookId
+        document.getElementById('updateTitle').value = title
+        document.getElementById('updateAuthor').value = author
+        document.getElementById('updateGenre').value = genre
+        document.getElementById('updateQuantity').value = quantity
+      }
+
+      async function updateBook() {
+        const bookId = document.getElementById('updateBookId').value
+        const updatedTitle = document.getElementById('updateTitle').value
+        const updatedAuthor = document.getElementById('updateAuthor').value
+        const updatedGenre = document.getElementById('updateGenre').value
+        const updatedQuantity = document.getElementById('updateQuantity').value
+
+        const response = await fetch(
+          `http://localhost:3001/customer/books/${bookId}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              title: updatedTitle,
+              author_name: updatedAuthor,
+              genre: updatedGenre,
+              quantity: updatedQuantity
+            })
+          }
+        )
+
+        if (response.ok) {
+          alert('Book updated successfully.')
+          location.reload()
+        } else {
+          alert('Error updating book.')
+        }
+      }
+      //-------------------------------------------------------
+      //DELETE BOOK 4/5
+      // Add a delete button to the search results
+
+      // Create a deleteBook function
+      async function deleteBook(bookId) {
+        const response = await fetch(
+          `http://localhost:3001/customer/books/${bookId}`,
+          {
+            method: 'DELETE'
+          }
+        )
+
+        if (response.ok) {
+          alert('Book deleted successfully')
+          // Refresh search results or remove the deleted book from the list
+        } else {
+          alert('Error deleting book')
+        }
+      }
+
+      //----------------------------------------------------
     </script>
   </body>
 </html>

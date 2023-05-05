@@ -17,6 +17,55 @@
     <br />
     <a href="/search">Sök och redigera (Read, Update och Delete)</a>
 
-    <script></script>
+    <div id="bookList"></div>
+    <!-- LAGT TILL 3/5 -->
+
+    <script>
+      //LAGT TILL 3/5
+      async function loadBooks() {
+        const response = await fetch('http://localhost:3001/books')
+        const books = await response.json()
+        const bookList = document.getElementById('bookList')
+
+        books.forEach((book) => {
+          const titleElement = document.createElement('p')
+          titleElement.innerText = `${book.title} || Tillgängliga: ${book.available_copies}`
+          bookList.appendChild(titleElement)
+        })
+      }
+      loadBooks()
+      /*      //LAGT TILL 3/5
+      const options = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json'
+        }
+      }
+
+      //LAGT TILL 3/5
+      async function printBookData() {
+        let data = await getBooks()
+        let body = document.querySelector('body')
+
+        for (const book of data) {
+          let element = document.createElement('p')
+          element.innerText = book.title
+          body.appendChild(element)
+          console.log(book)
+        }
+      }
+
+      //LAGT TILL 3/5
+      async function getBooks() {
+        const response = await fetch(
+          'http://localhost:3000/customers',
+          options
+        ).catch((error) => {
+          console.log(error)
+        })
+        let data = await response.json()
+        return data
+      } */
+    </script>
   </body>
 </html>
