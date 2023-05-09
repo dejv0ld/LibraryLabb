@@ -1,0 +1,36 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(37, 32, 75);
+}
+
+body {
+  background-color: rgb(37, 32, 75) !important;
+}
+
+p {
+  color: black;
+  padding-left: 10px;
+}
+
+h1,
+h3,
+h2 {
+  color: white !important;
+  padding-left: 10px;
+}
+
+#bookList {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.card {
+  margin: 10px;
+  color: white !important;
+  background-color: #2b3035 !important;
+}
+
+.list-group-item {
+  color: white !important;
+  background-color: #2b3035 !important;
+}

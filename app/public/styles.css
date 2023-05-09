@@ -1,115 +1,229 @@
 html {
-    font-family: Arial, Helvetica, sans-serif;
-    /* background-color:rgb(37, 32, 75); */
-    background-image: url("/background.jpg");
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(37, 32, 75);
 }
 
-h1, h3 {
-    
-    color: aliceblue;
+body {
+  background-color: rgb(37, 32, 75) !important;
+}
+
+h1,
+h3,
+h2 {
+  color: white !important;
+  padding-left: 10px;
 }
 
 label {
-    display: block;
-    color: aliceblue;
-    font-size: 24px;
-    margin:10px 0px 0px 0px;
+  color: aliceblue;
+  font-size: 16px;
+  margin: 5px 0px 0px 0px;
 }
 
 a {
-    color:crimson;
-    font-size: 24px;
+  color: crimson;
+  font-size: 16px;
+  background-color: grey;
+  padding: 6px 6px;
+  border-radius: 4px;
 }
 
 a:hover {
-    color:aquamarine;
-    cursor: pointer;
-    text-decoration: underline;
+  color: aquamarine;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 p {
-    color: lightgreen;
+  color: lightgreen;
 }
 
 .chat-message-box {
-    background-color:gray;
-    height:200px;
-    width: 50vw;
-    padding: 10px;
-    overflow-y: scroll;
-    border-radius:5px;
+  background-color: #2b3035;
+  height: 200px;
+  width: 50vw;
+  padding: 10px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  margin: 0 0 0 10px;
 }
 
 .chat-message {
-    background-color:lightgreen;
-    height:50px;
-    width: 30vw;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
+  background-color: #55616c;
+
+  width: 30vw;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .chat-input {
-    height: 50px;
-    width: 40vw;
-    font-size: 24px;
-    margin: 5px 0px 0px 0px;
-    border-radius: 5px;
+  font-size: 16px !important;
+  border-radius: 8px;
+  width: 400px;
+  padding: 10px !important;
+  border: 1px solid black;
+  margin: 0 0 0 10px;
 }
 
 .chat-input:hover {
-    background-color:rgb(230, 206, 247);
+  background-color: #869fe9;
 }
 
 .chat-button-send {
-    height: 50px;
-    width: 10vw;
-    font-size: 24px;
-    margin: 5px 0px 0px 0px;
-    border-radius: 5px;
+  padding: 9px 20px !important;
+  font-size: 16px;
+  margin: 10px 5px 10px 5px !important;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px !important;
+  color: white;
+  box-shadow: rgb(255, 255, 255) 0px 0px 10px;
+  cursor: pointer;
 }
 
-input  {
-    height: 50px;
-    width: 33vw;
-    font-size: 24px;
-    margin: 5px 0px 0px 0px;
-    border-radius: 5px;
+input {
+  font-size: 16px !important;
+  margin: 0px 0px 0px 0px;
+  border-radius: 8px;
+  width: 200px;
+  padding: 10px !important;
+  border: 1px solid black;
 }
 
 input:hover {
-    background-color:hwb(120 71% 0%);
+  background-color: #869fe9;
 }
 
 button {
-    height: 50px;
-    width: calc(33vw + 8px);
-    font-size: 24px;
-    margin: 5px 0px 0px 0px;
-    border-radius: 5px;
-    cursor:pointer;
+  padding: 9px 20px !important;
+  font-size: 16px;
+  margin: 10px 5px 10px 5px !important;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px !important;
+  color: white;
+  box-shadow: rgb(255, 255, 255) 0px 0px 10px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: rgb(249, 49, 166);
+  box-shadow: #869fe9 0px 0px 10px;
+  color: #869fe9;
+  border: #869fe9 1px solid;
 }
 
 .name {
-    background-color:lightgreen;
+  background-color: lightgreen;
 }
 
 .update-active {
-    display: block;
+  display: block !important;
 }
 
 .update-inactive {
-    display: none;
+  display: none !important;
 }
 
 .search-active {
-    display: block;
+  display: block !important;
+  margin: 0px 0px 0px 10px;
 }
 
 .search-inactive {
-    display: none;
+  display: none !important;
+  margin: 0px 0px 0px 10px;
+}
+
+table {
+  border-collapse: collapse !important;
+
+  box-shadow: rgb(255, 255, 255) 0px 0px 10px;
+  max-width: 100%;
+  min-width: 500px;
+  margin: 10px 0 0 10px;
+}
+
+th,
+td {
+  border: 1px solid #ccc !important;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: grey;
+  font-weight: bold;
+}
+
+td {
+  background-color: #2b3035;
+  color: white;
+}
+
+#form-container {
+  background-color: #2b3035;
+  display: flex;
+  border: 2px solid white;
+  box-shadow: rgb(255, 255, 255) 0px 0px 15px;
+  border-radius: 8px;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 20px 0px 0px 10px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#add-book-btn {
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  box-shadow: rgb(255, 255, 255) 0px 0px 10px;
+}
+
+#add-book-btn:hover {
+  box-shadow: #869fe9 0px 0px 10px;
+  color: #869fe9;
+  border: #869fe9 1px solid;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  flex-wrap: wrap;
+}
+
+#updateBookForm {
+  background-color: #2b3035;
+  display: flex;
+  border: 2px solid white;
+  box-shadow: rgb(255, 255, 255) 0px 0px 15px;
+  border-radius: 8px;
+  max-width: 500px;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.update-input {
+  font-size: 16px;
+  margin: 0px 10px 10px 0px;
+  border-radius: 8px;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid black;
 }
