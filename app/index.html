@@ -19,7 +19,7 @@
         data-bs-theme="dark"
       >
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Admin</a>
+          <a class="navbar-brand" href="#">Library</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -37,10 +37,10 @@
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/chat">Chat</a>
+                <a class="nav-link" href="/chat">Livesupport</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/search">Find Book</a>
+                <a class="nav-link" href="/search">Sök Bok</a>
               </li>
             </ul>
           </div>
@@ -57,7 +57,7 @@
     </div>
 
     <script>
-      //LAGT TILL 3/5
+      //Skriv ut tillgänliga böcker
       async function loadBooks() {
         const response = await fetch('http://localhost:3001/books')
         const books = await response.json()

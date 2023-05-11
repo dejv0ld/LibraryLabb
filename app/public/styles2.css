@@ -22,6 +22,7 @@ h2 {
 #bookList {
   display: flex !important;
   flex-direction: row !important;
+  flex-wrap: wrap !important;
 }
 
 .card {

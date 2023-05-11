@@ -40,12 +40,13 @@ p {
 
 .chat-message-box {
   background-color: #2b3035;
-  height: 200px;
+  min-height: 250px;
   width: 50vw;
   padding: 10px;
   overflow-y: scroll;
   border-radius: 5px;
-  margin: 0 0 0 10px;
+  margin: 0 0 20px 10px;
+  box-shadow: rgb(255, 255, 255) 0px 0px 10px;
 }
 
 .chat-message {
