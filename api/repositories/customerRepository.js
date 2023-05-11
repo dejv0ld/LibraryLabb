@@ -1,45 +1,117 @@
-const customerModel = require("../models/customerModel");
-const db_context = require("../db_context");
+const customerModel = require('../models/customerModel')
+const db_context = require('../db_context')
 
-async function getAllCustomers() {
+async function getAllBooks() {
+  let books = []
 
-    let customers = [];
+  let data = await db_context.selectAllBooks()
 
-    let data = await db_context.selectAllCustomers()
+  data.forEach((book) => {
+    books.push(
+      new customerModel(
+        book.book_id,
+        book.author_name,
+        book.title,
+        book.genre,
+        book.year,
+        book.total_copies,
+        book.available_copies
+      )
+    )
+  })
 
-    data.forEach(customer => {
-        customers.push(new customerModel(customer.first_name, customer.last_name, customer.email))
-    });
+  return books
+}
 
-    return customers;
-};
+async function getBooksByKeyword(keyword) {
+  let books = []
 
-async function getCustomerByKeyword(keyword) {
+  let data = await db_context.selectBooksByKeyword(keyword)
 
-    let customers = [];
+  data.forEach((book) => {
+    books.push(
+      new customerModel(
+        book.book_id,
+        book.author_name,
+        book.title,
+        book.genre,
+        book.year,
+        book.total_copies,
+        book.available_copies
+      )
+    )
+  })
 
-    let data = await db_context.selectCustomerByKeyword(keyword)
+  return books
+}
 
-    data.forEach(customer => {
-        customers.push(new customerModel(customer.customer_id, customer.first_name, customer.last_name, customer.email))
-    });
+//ADD BOOK 3/5
+async function addNewBook(
+  author_name,
+  title,
+  genre,
+  year,
+  total_copies,
+  available_copies
+) {
+  await db_context.insertBook(
+    author_name,
+    title,
+    genre,
+    year,
+    total_copies,
+    available_copies
+  )
+}
+//---------------------------------------
 
-    return customers;
-};
+//UPDATE BOOK 3/5
+async function updateBookInDatabase(
+  bookId,
+  title,
+  author_name,
+  genre,
+  quantity
+) {
+  const query = `
+    UPDATE books
+    SET
+      title = '${title}',
+      author_name = '${author_name}',
+      genre = '${genre}',
+      total_copies = ${quantity},
+      available_copies = ${quantity}
+
+    WHERE book_id = ${bookId};
+  `
+  db_context.db.none(query)
+}
+//------------------------------------
+
+//DELETE BOOK 4/5
+async function deleteBook(bookId) {
+  const query = `
+    DELETE FROM books
+    WHERE book_id = ${bookId};
+  `
+  await db_context.db.none(query)
+}
+//--------------------------------------
 
 async function addCustomer(firstName, lastName, email) {
-
-    db_context.insertCustomer(firstName, lastName, 'email@email.com');
-};
+  db_context.insertCustomer(firstName, lastName, 'email@email.com')
+}
 
 async function editCustomer(customerId, firstName, lastName, email) {
-
-    db_context.updateCustomer(customerId, firstName, lastName, email);
-};
+  db_context.updateCustomer(customerId, firstName, lastName, email)
+}
 
 module.exports = {
-    getAllCustomers,
-    getCustomerByKeyword,
-    addCustomer,
-    editCustomer
+  getAllBooks,
+  getBooksByKeyword,
+  addCustomer,
+  editCustomer,
+  addNewBook, //ADD BOOK 3/5
+  updateBookInDatabase, //UPDATE BOOK 3/5
+  deleteBook // DELETE BOOK 4/5
 }
